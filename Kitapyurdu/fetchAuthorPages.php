@@ -6,7 +6,14 @@ fetch($base);
 
 function fetch($base)
 {
-	$file_path = __DIR__.'/_data/authors.txt';
+	try {
+		$m = new Mongo(); // connect
+		$db = $m->selectDB("kitapyurdu");
+	} catch(MongoConnectionException $e) {
+		echo 'db error';
+     		exit();
+	}
+
 	$alphas = range('a', 'z');
 	$alphas = array_merge(array(
 		'%F6',
@@ -25,9 +32,11 @@ function fetch($base)
 				if (stristr($author->href, 'yazar')) {
 					$url = $base . $author->href;
 					echo $url . "\n";
-					file_put_contents($file_path, $url."\n", FILE_APPEND);
+					$db->authors->insert(array('url'=>$url));
 				}
 			}
+			unset($authors);
 		}
+		unset($html);
 	}
 }
