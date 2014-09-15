@@ -5,5 +5,5 @@ try {
 } catch(MongoConnectionException $e) {
      echo 'db error';
      exit();
-}
+} 
 

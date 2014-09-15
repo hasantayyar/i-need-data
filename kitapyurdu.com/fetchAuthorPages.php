@@ -8,18 +8,10 @@ set_time_limit(0);
 require './../lib/ganon.php';
 
 $base = "http://www.kitapyurdu.com";
-fetch($base);
+fetch($base,$m);
 
-function fetch($base)
+function fetch($base,$db)
 {
-	try {
-		$m = new Mongo(); // connect
-		$db = $m->selectDB("kitapyurdu");
-	} catch(MongoConnectionException $e) {
-		echo 'db error';
-     		exit();
-	}
-
 	$alphas = range('a', 'z');
 	$alphas = array_merge(array(
 		'%F6',
@@ -40,7 +32,7 @@ function fetch($base)
 				if (stristr($author->href, 'yazar')) {
 					$url = $base . $author->href;
 					echo $url . "\n";
-					$db->authors->insert(array('url'=>$url));
+					$db->authorlinks->insert(array('name'=>$author->getPlainText(), 'url'=>$url));
 				}
 				unset($author);
 			}
