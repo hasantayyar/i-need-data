@@ -1,5 +1,5 @@
 <?php
-require './lib/ganon.php';
+require './../lib/ganon.php';
 $base = "http://www.kitapyurdu.com";
 
 fetch($base);
