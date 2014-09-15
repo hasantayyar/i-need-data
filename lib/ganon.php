@@ -1001,7 +1001,7 @@ class HTML_Node {
 	}
 	function delete() {
 		if (($p = $this->parent) !== null) {
-			$this->parent = null;
+			unset($this->parent);
 			$p->deleteChild($this);
 		} else {
 			$this->clear();
@@ -1019,7 +1019,7 @@ class HTML_Node {
 	}
 	function clear() {
 		foreach($this->children as $c) {
-			$c->parent = null;
+			unset($c->parent);
 			$c->delete();
 		}
 		$this->children = array();
