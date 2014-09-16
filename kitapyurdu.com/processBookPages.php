@@ -4,6 +4,8 @@ include __DIR__.'/app/bootstrap.php';
 require './../lib/ganon.php';
 $cursor = $db->booklinks->find();
 $i=0;
+
+fetch("http://www.kitapyurdu.com/kitap/default.asp?id=658453",$db); die();
 foreach( $cursor as $book ){
 	$url = $book['url'];
 	++$i;
@@ -15,6 +17,7 @@ foreach( $cursor as $book ){
 
 function fetch($link,$db)
 { 
+	$data = array();
 	$base = "http://www.kitapyurdu.com";
  	$html = url_get_dom($link);
  	if(!$html){
@@ -25,9 +28,22 @@ function fetch($link,$db)
 		// @todo log fail
 		return FALSE;
 	}
- 	$authorsPlain = $authorsDom->getPlainText();
- 	$authors = explode('/',$authorsPlain);
-
- 	
-	usleep(200);
+ 	$authorsPlain = convertEncoding($authorsDom->getPlainText());
+ 	$data['authors'] = explode('/',$authorsPlain);
+	unset($authorsDom);
+	$brandDom = $html('[itemprop="brand"]',0);
+	if(is_object($brandDom)){
+		$data['brand'] = convertEncoding($brandDom->getPlainText());
+	}
+	$descDom = $html('[class="kitapyazi"]',0);
+	if(is_object($descDom)){
+		$data["desc"] = str_replace( array("SİTE:www.kitapyurdu.com","SÝTE:www.kitapyurdu.com"),"",convertEncoding($descDom->getPlainText()));
+	}
+	$infoDom = $html('table tr td span[class="normalkucuk"]',0);
+	if(is_object($infoDom)){
+		$data['info'] = $infoDom->getPlainText();
+	}
+	print_r($data);
+ 	$html->clear();
+	unset($html);
 }
