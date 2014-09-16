@@ -43,5 +43,5 @@ function fetch($link,$db)
 		unset($book);
 	}
 	unset($books);
-	sleep(1);
+	usleep(200);
 }
