@@ -14,6 +14,20 @@ function str_get_dom($str, $return_root = true) {
 	$a = new HTML_Parser_HTML5($str);
 	return (($return_root) ? $a->root : $a);
 }
+
+function url_get_dom($link,$return_root = true){
+		$ch = curl_init();
+		$headers["User-Agent"] = "Curl/1.0";
+		curl_setopt($ch, CURLOPT_URL, $link);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,120); 
+		curl_setopt($ch, CURLOPT_TIMEOUT, 120); 
+		$response = curl_exec($ch);
+		curl_close($ch);
+		return (($response === false) ? false : str_get_dom($response, $return_root));
+}
 function file_get_dom($file, $return_root = true, $use_include_path = false, $context = null) {
 	if (version_compare(PHP_VERSION, '5.0.0', '>='))
 		$f = file_get_contents($file, $use_include_path, $context);
