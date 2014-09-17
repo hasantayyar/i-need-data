@@ -7,9 +7,10 @@ $i=0;
 foreach( $cursor as $author ){
 	$url = $author['url'];
 	++$i;
+	if(isset($argv[1]) && $i <$argv[1]) continue;
 	echo("Processing $url - $i \n");
 	fetch($url,$db); 
-	usleep(200);
+	usleep(100);
 }
 
 
@@ -43,5 +44,4 @@ function fetch($link,$db)
 		unset($book);
 	}
 	unset($books);
-	usleep(200);
 }
