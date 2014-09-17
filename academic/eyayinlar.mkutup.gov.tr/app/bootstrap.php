@@ -7,7 +7,7 @@ iconv_set_encoding('internal_encoding', 'UTF-8');
 
 try {
      $m = new Mongo(); // connect
-     $db = $m->selectDB("kitapyurdu");
+     $db = $m->selectDB("turkish_library");
 } catch(MongoConnectionException $e) {
      echo 'db error';
      exit();

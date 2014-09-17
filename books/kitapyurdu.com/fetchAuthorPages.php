@@ -5,7 +5,7 @@ ini_set('implicit_flush', 1);
 set_time_limit(0);
 
 
-require './../lib/ganon.php';
+require './../../lib/ganon.php';
 
 $base = "http://www.kitapyurdu.com";
 fetch($base,$m);

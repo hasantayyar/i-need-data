@@ -1,5 +1,5 @@
 <?php
-include '../lib/ganon.php';
+include __DIR__.'/../../lib/ganon.php';
 
 $base = "http://eyayinlar.mkutup.gov.tr";
 $startUrl = "http://eyayinlar.mkutup.gov.tr/cgi-bin/WebObjects/Makale";

@@ -1,7 +1,7 @@
 <?php
 header( 'Content-Type: text/html; charset=UTF-8' );
 include __DIR__.'/app/bootstrap.php';
-require './../lib/ganon.php';
+require './../../lib/ganon.php';
 $cursor = $db->booklinks->find();
 $i=0;
 
