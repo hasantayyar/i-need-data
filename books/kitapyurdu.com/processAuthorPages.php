@@ -41,7 +41,5 @@ function fetch($link,$db)
 			'author' => convertEncoding($author->getPlainText()),
 			); 
 		$db->booklinks->insert($data);
-		unset($book);
 	}
-	unset($books);
 }
