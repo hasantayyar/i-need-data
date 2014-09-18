@@ -7,8 +7,11 @@ $i=0;
 foreach( $cursor as $author ){
 	$url = $author['url'];
 	++$i;
+	$cursorLastPos = (int)file_get_contents(__DIR__.'/cursorposition');
 	if(isset($argv[1]) && $i <$argv[1]) continue;
+	else if($cursorLastPos > 0 && $i < $cursorLastPos ) continue;
 	echo("Processing $url - $i \n");
+	file_put_contents(__DIR__.'/cursorposition',$i);
 	fetch($url,$db); 
 	usleep(100);
 }
@@ -42,4 +45,7 @@ function fetch($link,$db)
 			); 
 		$db->booklinks->insert($data);
 	}
+	$html->clear();
+	unset($html);
+	unset($books);
 }
