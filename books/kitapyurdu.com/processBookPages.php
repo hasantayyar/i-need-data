@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 header( 'Content-Type: text/html; charset=UTF-8' );
 include __DIR__.'/app/bootstrap.php';

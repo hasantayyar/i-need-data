@@ -1,1 +1,0 @@
-{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "kitapyurdu.authorlinks", "name" : "_id_" }, { "v" : 1, "key" : { "url" : 1 }, "unique" : true, "ns" : "kitapyurdu.authorlinks", "name" : "url_1", "dropDups" : true } ] }
